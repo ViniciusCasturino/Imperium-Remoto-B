@@ -1,37 +1,43 @@
 package com.imperium.backend.api.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.imperium.backend.api.dto.CadastroRequest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @RestController
+@RequestMapping("/api")
 public class ApiController {
 
-    private List<String> cadastros = new ArrayList<>();
-
     private final ObjectMapper objectMapper;
+    private final List<CadastroRequest> cadastros = new ArrayList<>();
 
     public ApiController(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
-    @GetMapping(path = "/cadastros")
-    public ResponseEntity<String> cadastroCliente() throws JsonProcessingException {
-        return ResponseEntity.ok(objectMapper.writeValueAsString(cadastros));
+    @PostMapping("/cadastros")
+    public ResponseEntity<String> cadastrarUsuario(@RequestBody CadastroRequest request) {
+        if (!request.getSenha().equals(request.getConfirmarSenha())) {
+            return ResponseEntity.badRequest().body("As senhas não coincidem.");
+        }
+      
+        boolean emailJaExiste = cadastros.stream()
+                .anyMatch(c -> c.getEmail().equalsIgnoreCase(request.getEmail()));
+
+        if (emailJaExiste) {
+            return ResponseEntity.badRequest().body("Email já cadastrado.");
+        }
+       
+        cadastros.add(request);
+        return ResponseEntity.ok("Usuário cadastrado com sucesso.");
     }
 
-    @PostMapping(path = "/cadastros")
-    public ResponseEntity<Void> createClient(@RequestBody String cadastro) {
-        cadastros.add(cadastro);
-        return ResponseEntity.ok().build();
+    @GetMapping("/cadastros")
+    public ResponseEntity<List<CadastroRequest>> listarCadastros() {
+        return ResponseEntity.ok(cadastros);
     }
 }
-
