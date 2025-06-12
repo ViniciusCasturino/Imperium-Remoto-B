@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.imperium.backend.dto.EnderecoRequest;
 
 @RestController
-@RequestMapping("/api/enderecos")
+@RequestMapping("/api")
 public class EnderecoController {
 
     private final List<EnderecoRequest> enderecos = new ArrayList<>();
 
-    @PostMapping
+    @PostMapping("/endereco")
     public ResponseEntity<String> cadastrarEndereco(@RequestBody EnderecoRequest request) {
 
         if (request.getCep() == null || request.getRua() == null ||
@@ -30,8 +30,9 @@ public class EnderecoController {
         return ResponseEntity.ok("Endereço cadastrado com sucesso.");
     }
 
-    @GetMapping
+    @GetMapping("/endereco")
     public ResponseEntity<List<EnderecoRequest>> listarEnderecos() {
         return ResponseEntity.ok(enderecos);
     }
+
 }
