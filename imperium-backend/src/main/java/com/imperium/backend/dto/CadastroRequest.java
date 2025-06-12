@@ -1,4 +1,4 @@
-package com.imperium.backend.api.dto;
+package com.imperium.backend.dto;
 
 public class CadastroRequest {
     private String nomeCompleto;

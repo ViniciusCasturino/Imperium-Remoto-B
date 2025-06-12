@@ -1,21 +1,26 @@
 package com.imperium.backend.api.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.imperium.backend.api.dto.CadastroRequest;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.imperium.backend.dto.CadastroRequest;
+
 @RestController
 @RequestMapping("/api")
-public class ApiController {
+public class CadastroController {
 
     private final ObjectMapper objectMapper;
     private final List<CadastroRequest> cadastros = new ArrayList<>();
 
-    public ApiController(ObjectMapper objectMapper) {
+    public CadastroController(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
