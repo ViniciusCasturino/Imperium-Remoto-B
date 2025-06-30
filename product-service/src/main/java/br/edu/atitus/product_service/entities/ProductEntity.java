@@ -9,18 +9,20 @@ public class ProductEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(name = "description")
-	private String description_product;
+	private String description;
+	
 	@Column(name = "brand")
-	private String brand_product;
+	private String brand;
 	@Column(name = "model")
-	private String model_product;
+	private String model;
 	@Column(name = "price")
-	private double price_product;
+	private double price;
 	@Column(name = "currency")
-	private String currency_product;
+	private String currency;
 	@Column(name = "stock")
-	private Integer stock_product;
+	private Integer stock;
 
 	@Column(name = "image_url")
 	private String imageUrl;
@@ -29,7 +31,6 @@ public class ProductEntity {
 	private String enviroment;
 	@Transient
 	private double convertedPrice;
-	
 	public Long getId() {
 		return id;
 	}
@@ -37,40 +38,46 @@ public class ProductEntity {
 		this.id = id;
 	}
 	public String getDescription() {
-		return description_product;
+		return description;
 	}
-	public void setDescription(String description) {
-		this.description_product = description;
+	public void setDescription(String description_product) {
+		this.description = description_product;
 	}
 	public String getBrand() {
-		return brand_product;
+		return brand;
 	}
-	public void setBrand(String brand) {
-		this.brand_product = brand;
+	public void setBrand(String brand_product) {
+		this.brand = brand_product;
 	}
 	public String getModel() {
-		return model_product;
+		return model;
 	}
-	public void setModel(String model) {
-		this.model_product = model;
+	public void setModel(String model_product) {
+		this.model = model_product;
 	}
 	public double getPrice() {
-		return price_product;
+		return price;
 	}
-	public void setPrice(double price) {
-		this.price_product = price;
+	public void setPrice(double price_product) {
+		this.price = price_product;
 	}
 	public String getCurrency() {
-		return currency_product;
+		return currency;
 	}
-	public void setCurrency(String currency) {
-		this.currency_product = currency;
+	public void setCurrency(String currency_product) {
+		this.currency = currency_product;
 	}
 	public Integer getStock() {
-		return stock_product;
+		return stock;
 	}
-	public void setStock(Integer stock) {
-		this.stock_product = stock;
+	public void setStock(Integer stock_product) {
+		this.stock = stock_product;
+	}
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	public String getEnviroment() {
 		return enviroment;
@@ -84,12 +91,6 @@ public class ProductEntity {
 	public void setConvertedPrice(double convertedPrice) {
 		this.convertedPrice = convertedPrice;
 	}
-
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
+	
+	
 }
